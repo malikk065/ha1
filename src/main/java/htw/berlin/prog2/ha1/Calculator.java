@@ -14,6 +14,10 @@ public class Calculator {
 
     private String latestOperation = "";
 
+    private boolean clearedOnce = false;
+
+
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -34,6 +38,7 @@ public class Calculator {
         if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
 
         screen = screen + digit;
+        if(screen.equals("0") || latestValue == Double.parseDouble(screen)) screen = "";
     }
 
     /**
@@ -45,9 +50,15 @@ public class Calculator {
      * im Ursprungszustand ist.
      */
     public void pressClearKey() {
-        screen = "0";
-        latestOperation = "";
-        latestValue = 0.0;
+        if (!clearedOnce) {
+            screen = "0";
+            clearedOnce = true;
+        } else {
+            screen = "0";
+            latestOperation = "";
+            latestValue = 0.0;
+            clearedOnce = false;
+        }
     }
 
     /**
