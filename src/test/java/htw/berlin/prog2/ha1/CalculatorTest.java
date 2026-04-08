@@ -90,5 +90,50 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
-}
 
+    // Der Test der funktioniert
+
+    @Test
+    @DisplayName("Sollte das Ergebnis anzeigen zwischen 2 Nummern")
+    void testSubtraction() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(3);
+        calc.pressEqualsKey();
+
+        assertEquals("6", calc.readScreen());
+    }
+
+// Fehlerhafter Code
+
+    @Test
+    @DisplayName("sollte nichts tun wenn Gleich gedrückt wird ohne vorherige Operation")
+    void testGleichOhneOperation () {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+
+        assertEquals("5", calc.readScreen());
+    }
+
+    @Test
+    @DisplayName("sollte die gemerkte Operation nach einmaligem Clear behalten")
+    void testClearErsterDruck() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(3);
+        calc.pressClearKey();
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+
+        assertEquals("6", calc.readScreen());
+
+
+    }
+
+}
